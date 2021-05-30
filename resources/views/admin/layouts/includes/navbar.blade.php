@@ -10,7 +10,7 @@
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('admin/assets/images/users/avatar-1.jpg') }}" alt="" width="30" height="24"
                         class="d-inline-block align-text-top">
-                    Bootstrap
+                    Admin Panel
                 </a>
             </div>
         </nav>
@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/">Welcome</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Features</a>

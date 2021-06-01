@@ -73,7 +73,7 @@
                         <span class="badge rounded-pill bg-warning float-end">New</span>
                         <span>Chat</span>
                     </a>
-                </li>>
+                </li>
 
             </ul>
         </div>

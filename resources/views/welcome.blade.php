@@ -48,30 +48,37 @@
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
                         id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
+                            @if (Route::has('login'))
+                            @auth
                             <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page"
-                                    href="#">Home</a></li>
+                                    href="{{ url('/home') }}">Work Space</a></li>
                             <li class="nav-item px-2"><a class="nav-link fw-medium" href="#features">Jobs</a></li>
                             <li class="nav-item px-2"><a class="nav-link fw-medium" href="#pricing">Career tips</a></li>
+                            @else
+
+                            @endauth
+                            @endif
                         </ul>
                         <div class="ps-lg-5">
                             @if (Route::has('login'))
                             @auth
-                            <a href="{{ url('/home') }}"
-                                class="btn btn-lg btn-primary rounded-pill bg-gradient order-0">Home</a>
+
                             <a class="btn btn-lg btn-success rounded-pill bg-gradient order-0">Welcome,
                                 {{ Auth::user()->name }}
                             </a>
-                            <a class="btn btn-sm btn-primary rounded-pill bg-gradient order-0"
+
+                            <a class="btn btn-sm btn-primary rounded-pill bg-gradient order-0 "
                                 href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
-                                    class=" uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i>
+                                    class=" uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted "></i>
                                 <span class="align-middle">Sign out</span></a>
+
+
+
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-
-
 
                             @else
                             <a href="{{ route('login') }}"

@@ -18,9 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/l', function () {
-    return view('auth/register2');
+    return view('table');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/user', App\Http\Controllers\UserController::class);

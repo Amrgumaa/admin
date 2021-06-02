@@ -2,21 +2,7 @@
 @section('head')
 <!-- Plugins css -->
 <link href="{{ asset('admin/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-        var form = document.getElementById('needs-validation');
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    }, false);
-})();
-</script>
+
 @endsection
 @section('title', 'Create User')
 @section('pagehead', 'Create User')
@@ -58,7 +44,7 @@
                     <form role="form" class="card-body  needs-validation" action="{{route('user.store')}}" method="post"
                         enctype="multipart/form-data" novalidate>
                         @csrf
-                        <x-alert />
+                        <!-- <x-/////alert /> -->
                         <div class="mb-3 row">
                             <label class="col-md-2 col-form-label" for="name">Name</label>
                             <div class="col-md-10">
@@ -130,8 +116,7 @@
                         <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" rows="3"
-                                placeholder="Enter Description" name="description"
-                                required>{{ old('description')}}</textarea>
+                                placeholder="Enter Description" name="description">{{ old('description')}}</textarea>
                             <div class="invalid-feedback">
                                 Field is required
                             </div>
@@ -191,6 +176,7 @@
 
 @section('foot')
 <!-- Plugins js -->
-<script src="{{ asset('admin/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+
+< src="{{ asset('admin/assets/libs/dropzone/min/dropzone.min.js') }}"></>
 @endsection
 @endsection

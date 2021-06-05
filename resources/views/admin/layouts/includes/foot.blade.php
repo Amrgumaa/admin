@@ -9,9 +9,9 @@
 
 
  <!-- apexcharts -->
- <script src="{{ asset('admin/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+ <!-- <script src="{{ asset('admin/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
- <script src="{{ asset('admin/assets/js/pages/dashboard.init.js') }}"></script>
+ <script src="{{ asset('admin/assets/js/pages/dashboard.init.js') }}"></script> -->
  <!-- parsleyjs validation -->
  <script src="{{ ('admin/assets/libs/parsleyjs/parsley.min.js') }}"></script>
 
@@ -19,13 +19,14 @@
 
  <!-- App js -->
  <script src="{{ asset('admin/assets/js/app.js') }}"></script>
+
+
+ @if(Session::has('success'))
  <!-- toastr plugin -->
  <script src="{{ asset('admin/assets/libs/toastr/build/toastr.min.js') }}"></script>
 
  <!-- toastr init -->
  <script src="{{asset('assets/js/pages/toastr.init.js') }}"></script>
-
- @if(Session::has('success'))
  <script>
 toastr.options = {
     "closeButton": true,

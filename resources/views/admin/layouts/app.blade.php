@@ -12,7 +12,12 @@
         @include('admin.layouts/includes/head')
         <!-- endhead -->
     </head>
-    <body data-sidebar="colored">
+    <body data-keep-enlarged="true" class="vertical-collpsed" data-sidebar="">
+        <!-- data sidbar dark -->
+        <!-- Loader -->
+        <!-- loading -->
+        <div class="se-pre-con"></div>
+
         <!-- Begin page -->
         <div id="layout-wrapper">
 
@@ -21,24 +26,22 @@
                 @include('admin.layouts/includes/navbar')
             </header>
             <!-- ========== Left Sidebar Start ========== -->
-            <div class="vertical-menu">
+            ̉̉̉ <div class="vertical-menu">
                 <!-- sidebar -->
                 @include('admin.layouts/includes/sidebar')
             </div>
+
             <!-- Left Sidebar End -->
 
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
-
                         <!-- start new work here -->
                         @yield('maincontent')
                         <!-- end work here -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->

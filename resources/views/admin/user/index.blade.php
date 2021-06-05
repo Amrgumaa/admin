@@ -29,6 +29,7 @@
          </div>
      </div>
  </div>
+
  <!-- end page title -->
  <!-- Start here -->
  <div class="row">

@@ -184,6 +184,7 @@
                                 <input id="image" type="file"
                                     class="form-control form-control-sm @error('image') is-invalid @enderror"
                                     name="image" required>
+
                                 <div class="invalid-feedback">
                                     Field is required
                                 </div>
@@ -200,13 +201,15 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
 <!-- end -->
-
 
 
 @section('foot')

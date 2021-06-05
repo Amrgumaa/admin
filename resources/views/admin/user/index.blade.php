@@ -12,19 +12,35 @@
  <!-- Sweet Alert-->
  <link href="{{ asset('admin/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
  @endsection
- @section('title', 'User page')
+ @section('title', 'All Users list')
  @section('maincontent')
  <!-- start page title -->
  <div class="row">
      <div class="col-12">
-         <div class="card card card-info card-outline card-tabs">
-             <div class="card-header border-bottom border-info" style="background-color: white;">
-                 <h3 class="card-title"> <a href="{{route('user.create')}}"> <button type="button"
-                             class="btn btn-info btn-soft-info waves-effect waves-light">Create
-                             new</button></a> </h3>
-
+         <div class="page-title-box d-flex align-items-center justify-content-between">
+             <a href="{{route('user.index')}}"> <button type="button" class="btn btn-info">Back</button></a>
+             <h4 class="mb-0">All Users</h4>
+             <div class="page-title-right">
+                 <ol class="breadcrumb m-0">
+                     <li class="breadcrumb-item"><a href="javascript: void(0);">Vertical</a></li>
+                     <li class="breadcrumb-item active">Colored Sidebar</li>
+                 </ol>
              </div>
+         </div>
+     </div>
+ </div>
+ <!-- end page title -->
+ <!-- Start here -->
+ <div class="row">
+     <div class="col-md-12">
+         <div class="card">
              <div class="card-body">
+                 <div class="mb-3">
+                     <a href="{{route('user.create')}}" class="btn btn-success waves-effect waves-light"
+                         data-bs-target="#createuser">
+                         <i class="mdi mdi-plus me-2"></i> Add New
+                     </a>
+                 </div>
                  <table class="table table-hover" id="example1" style="font-size: 14px;">
                      <thead>
                          <tr>
@@ -59,7 +75,7 @@
                              <td> <a href="">{{ $user->id }}</a></td>
                              <td>
                                  <div class="image">
-                                     <img src="{{ asset('admin/assets/images/users/avatar-2.jpg') }}" alt=""
+                                     <img src="{{ $user->getFirstMediaUrl() }}" alt=""
                                          class="avatar-xs rounded-circle me-2"> <a href="#" class="text-body">
                                  </div>
                              </td>
@@ -67,9 +83,10 @@
                              <td>{{ ucfirst($user->email) }}</td>
                              <td>Roles</td>
                              <td class="btn-group">
-                                 <a class=" btn btn-info btn-soft-info waves-effect waves-light btn-sm"
-                                     href="{{route('user.edit',$user->id) }}"> <i class="fas fa-edit"></i></a>
 
+                                 <a class="btn btn-info btn-soft-info waves-effect waves-light btn-sm"
+                                     href="{{route('user.edit',$user->id) }}"> <i class="fas fa-edit "> </i></a>
+                                 <!-- edituser end -->
                                  <form action="{{ route('user.destroy',$user->id) }}" method="post">
                                      @csrf
                                      @method('DELETE')
@@ -92,6 +109,8 @@
          </div>
      </div> <!-- end col -->
  </div> <!-- end row -->
+
+
 
 
  @section('foot')
@@ -133,10 +152,16 @@ $(function() {
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
+        "order": [
+            [1, 'desc'],
+        ],
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 });
  </script>
+
 
 
  <script>

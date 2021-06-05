@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Session;
+
 
 
 class Usercontroller extends Controller
@@ -44,26 +46,29 @@ class Usercontroller extends Controller
         $request->validate([
             'name' => "required|unique:users|max:255",
             'email' => "required|string|email|max:255|unique:users",
-            'description' => 'required',
-            'image' => 'image',
+            'image' => 'image.jpg',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
         // dd($request->all());
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'description' => $request->description,
-            'image' => 'image.jpg',
         ]);
-        $user->save();
-        if ($request->hasFile('image')) {
-            $image =  request()->file('image')->getClientOriginalName();
-            request()->file('image')->storeAs('public' . '/' . 'users', $user->id . '/' . $image, '');
-            $user->update(['image' => $image]);
-        }
 
-        return redirect()->route('user.create')->with('success', 'Record created successfully');
+
+        $user->save();
+
+
+        // if ($request->hasFile('image')) {
+        //     $image =  request()->file('image')->getClientOriginalName();
+        //     request()->file('image')->storeAs('public' . '/' . 'users', $user->id . '/' . $image, '');
+        //     $user->update(['image' => $image]);
+        // }
+
+        return redirect()->route('user.index')->with('success', 'Record created successfully');
 
 
 
@@ -104,23 +109,13 @@ class Usercontroller extends Controller
         $request->validate([
             'name' => "required|unique:users,name,$user->id",
             'email' => "required|email|unique:users,email, $user->id",
-            'password' => 'sometimes|nullable|min:8',
-            'description' => 'required',
-            'image' => 'image',
         ]);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
         $user->description = $request->description;
-        if ($request->hasFile('image')) {
-            $image = $request->image;
-            $image =  request()->file('image')->getClientOriginalName();
-            request()->file('image')->storeAs('public' . '/' . 'users', $user->id . '/' . $image, '');
-            $user->update(['image' => $image]);
-        }
         $user->save();
-
         return redirect()->route('user.index')->with('success', 'Record updated successfully');
+
     }
 
     /**
@@ -136,8 +131,32 @@ class Usercontroller extends Controller
                 unlink(public_path('storage/users/' . $user->id . '/' . $user->image));
             }
             $user->delete();
-            return redirect()->route('user.index')
+            return redirect()->back()
                 ->with('success', 'Record deleted successfully');
         }
+    }
+
+   public function changepassword(Request $request, User $user)
+    {
+
+         $request->validate([
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+         $user->password = bcrypt($request->password);
+          $user->save();
+       return redirect()->back()->with('success', 'Password updated successfully');
+    }
+     public function changeavatar(Request $request, User $user)
+    {
+
+         $request->validate([
+         'image' => "required",
+        ]);
+           $user->delete();
+           $user->addMedia($request->image)->toMediaCollection();
+           $user->save();
+
+       return redirect()->back()->with('success', 'Image uploaded successfully');
+
     }
 }

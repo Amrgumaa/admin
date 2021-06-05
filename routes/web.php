@@ -25,3 +25,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/user', App\Http\Controllers\UserController::class);
+Route::put('/user/{user}/changepassword', [App\Http\Controllers\UserController::class, 'changepassword'])->name('changepassword');
+Route::put('/user/{user}/changeavatar/', [App\Http\Controllers\UserController::class, 'changeavatar'])->name('changeavatar');

@@ -51,7 +51,7 @@
                             @if (Route::has('login'))
                             @auth
                             <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page"
-                                    href="{{ url('/home') }}">Work Space</a></li>
+                                    href="{{ route('home') }}">Work Space</a></li>
                             <li class="nav-item px-2"><a class="nav-link fw-medium" href="#features">Jobs</a></li>
                             <li class="nav-item px-2"><a class="nav-link fw-medium" href="#pricing">Career tips</a></li>
                             @else

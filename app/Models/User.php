@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Models\Activity;
+
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasFactory,InteractsWithMedia,Notifiable;
+    use HasFactory,InteractsWithMedia,Notifiable,LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +23,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-       'name', 'email', 'password', 'description', 'slug', 'image',
+       'name', 'email', 'password', 'description', 'image',
     ];
 
     /**
@@ -40,4 +44,17 @@ class User extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+      public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logFillable()
+        ->useLogName('user')
+        ->logOnlyDirty();
+        // Chain fluent methods for configuration options
+    }
+
+    //   public function activity ()
+    // {
+    //     return $this->belongsTo(Activity::class, 'causer_id', 'user_id');
+    // }
 }

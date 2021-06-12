@@ -12,24 +12,23 @@
      <!-- Sweet Alert-->
      <link href="{{ asset('admin/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
  @endsection
- @section('title', 'All Users list')
+ @section('title', 'Activity Log')
  @section('maincontent')
      <!-- start page title -->
      <div class="row">
          <div class="col-12">
              <div class="page-title-box d-flex align-items-center justify-content-between">
                  <a href="{{ route('user.index') }}"> <button type="button" class="btn btn-info">Back</button></a>
-                 <h4 class="mb-0">All Users</h4>
+                 <h4 class="mb-0">Activity Log</h4>
                  <div class="page-title-right">
                      <ol class="breadcrumb m-0">
                          <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                         <li class="breadcrumb-item active">All Users</li>
+                         <li class="breadcrumb-item active">Activity Log</li>
                      </ol>
                  </div>
              </div>
          </div>
      </div>
-
      <!-- end page title -->
      <!-- Start here -->
      <div class="row">
@@ -37,66 +36,86 @@
              <div class="card">
                  <div class="card-body">
                      <div class="mb-3">
-                         <a href="{{ route('user.create') }}" class="btn btn-success waves-effect waves-light"
-                             data-bs-target="#createuser">
-                             <i class="mdi mdi-plus me-2"></i> Add New
-                         </a>
                      </div>
                      <table class="table table-hover" id="example1" style="font-size: 14px;">
+                         <div class="mb-3">
+                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                 <a href="{{ route('activity.index') }}" class="btn btn-success waves-effect waves-light">
+                                     Activity Dashboard
+                                 </a>
+                                 <a href="{{ route('activity.index') }}" class="btn btn-success waves-effect waves-light">
+                                     Activity Log
+                                 </a>
+                                 <a href="{{ route('activity.loginactivity') }}"
+                                     class="btn btn-success waves-effect waves-light">
+                                     Login Activity
+                                 </a>
+                                 <a href="{{ route('activity.loginactivity') }}"
+                                     class="btn btn-success waves-effect waves-light">
+                                     Visitor Activity
+                                 </a>
+                             </div>
+                         </div>
                          <thead>
+
                              <tr>
-                                 <th width="10px">
-                                     <div class="custom-control custom-checkbox">
-                                         <input
-                                             class="custom-control-input custom-control-input-danger custom-control-input-outline"
-                                             type="checkbox" id="selectall">
-                                         <label for="selectall" class="custom-control-label"></label>
-                                     </div>
-                                 </th>
                                  <th width="10px">ID</th>
-                                 <th width="10px">Profile</th>
-                                 <th>Name</th>
-                                 <th>email</th>
-                                 <th>Roles</th>
+                                 <th width="">log_name</th>
+                                 <th width="">description</th>
+                                 <th width="">Subject type</th>
+                                 <th width="">Subject id</th>
+                                 <th>Causer type</th>
+                                 <th>Causer id</th>
+                                 <th>Causer name</th>
+                                 <th>Time ago</th>
+                                 <th>Created at</th>
                                  <th width="10px">Action</th>
+                                 <th width="5 px">Properties</th>
                              </tr>
                          </thead>
                          <tbody>
-                             @if ($users->count())
-                                 @foreach ($users as $user)
+                             @if ($activities->count())
+                                 @foreach ($activities as $activity)
                                      <tr>
-                                         <td>
-                                             <div class="custom-control custom-checkbox">
-                                                 <input
-                                                     class="custom-control-input custom-control-input-danger custom-control-input-outline"
-                                                     type="checkbox" id="{{ $user->id }}" name=" {{ $user->id }}">
-                                                 <label for="{{ $user->id }}" class="custom-control-label"></label>
-                                             </div>
-                                         </td>
-                                         <td> <a href="">{{ $user->id }}</a></td>
-                                         <td>
-                                             <div class="image">
-                                                 <img src="{{ $user->getFirstMediaUrl() }}" alt=""
-                                                     class="avatar-xs rounded-circle me-2"> <a href="#" class="text-body">
-                                             </div>
-                                         </td>
-                                         <td> {{ ucfirst($user->name) }}</td>
-                                         <td>{{ ucfirst($user->email) }}</td>
-                                         <td>Roles</td>
-                                         <td class="btn-group">
+                                         <td> <a href="">{{ $activity->id }}</a></td>
+                                         <td> {{ ucfirst($activity->log_name) }}</td>
+                                         <td> {{ ucfirst($activity->description) }}</td>
+                                         <td>{{ ucfirst($activity->subject_type) }}</td>
+                                         <td>{{ $activity->subject_id }}</td>
+                                         <td>{{ ucfirst($activity->causer_type) }}</td>
+                                         <td>{{ ucfirst($activity->causer_id) }}</td>
+                                         @if ($activity->causer_id > 1)
+                                             <td> {{ $activity->causer_type::find($activity->causer_id)->name }} </td>
+                                         @else
+                                             <td></td>
+                                         @endif
 
-                                             <a class="btn btn-info btn-soft-info waves-effect waves-light btn-sm"
-                                                 href="{{ route('user.edit', $user->id) }}"> <i class="fas fa-edit ">
-                                                 </i></a>
-                                             <!-- edituser end -->
-                                             <form action="{{ route('user.destroy', $user->id) }}" method="post">
-                                                 @csrf
-                                                 @method('DELETE')
-                                                 <button type="button"
-                                                     class="btn btn-danger btn-soft-danger waves-effect waves-light btn-sm delete-confirm"
-                                                     data-name="{{ $user->name }}"><i class="fas fa-trash"></i></button>
-                                             </form>
+
+                                         <td> {{ strtolower(\Carbon\Carbon::parse($activity->created_at)->diffForHumans()) }}
                                          </td>
+                                         <td>{{ ucfirst($activity->created_at) }}</td>
+                                         @if ($activity->properties == '[]')
+                                             <td class="btn-group">
+                                                 <a class="btn btn-success btn-soft-success waves-effect waves-light btn-sm"
+                                                     href=""> <i class="fas fa-eye ">
+                                                     </i></a>
+                                             </td>
+                                         @else
+                                             <td>
+                                                 <a class="btn btn-success btn-soft-success waves-effect waves-light btn-sm"
+                                                     href="{{ route('activity.show', $activity->id) }}"> <i
+                                                         class="fas fa-eye ">
+                                                     </i></a>
+                                             </td>
+                                             @if ($activity->properties == '')
+                                                 <td>
+
+                                                 </td>
+                                             @else
+                                                 <td>{{ $activity->properties }} </td>
+                                             @endif
+                                         @endif
+
                                      </tr>
 
                                  @endforeach
@@ -155,7 +174,7 @@
                  "lengthChange": false,
                  "autoWidth": false,
                  "order": [
-                     [1, 'desc'],
+                     [0, 'desc'],
                  ],
                  "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 

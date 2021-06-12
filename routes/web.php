@@ -17,13 +17,18 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/l', function () {
-    return view('table');
-});
+// Route::get('/l', function () {
+//     return view('table');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/user', App\Http\Controllers\UserController::class);
-Route::put('/user/{user}/changepassword', [App\Http\Controllers\UserController::class, 'changepassword'])->name('changepassword');
-Route::put('/user/{user}/changeavatar/', [App\Http\Controllers\UserController::class, 'changeavatar'])->name('changeavatar');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+
+ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ Route::resource('/user', App\Http\Controllers\UserController::class);
+ Route::put('/user/{user}/changepassword', [App\Http\Controllers\UserController::class, 'changepassword'])->name('changepassword');
+ Route::put('/user/{user}/changeavatar/', [App\Http\Controllers\UserController::class, 'changeavatar'])->name('changeavatar');
+ Route::resource('/activity', App\Http\Controllers\ActivityController::class);
+  Route::get('/loginactivity', [App\Http\Controllers\ActivityController::class, 'loginactivity'])->name('activity.loginactivity');
+});

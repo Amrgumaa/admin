@@ -34,32 +34,29 @@
      <div class="row">
          <div class="col-md-12">
              <div class="card">
+                 <div class="p-1">
+                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                         <a href="{{ route('activity.index') }}" class="btn btn-info waves-effect waves-light ">
+                             Activity Dashboard
+                         </a>
+                         <a href="{{ route('activity.index') }}" class="btn btn-info waves-effect waves-light">
+                             Activity Log
+                         </a>
+                         <a href="{{ route('activity.loginactivity') }}" class="btn btn-info waves-effect waves-light">
+                             Login Activity
+                         </a>
+                         <a href="{{ route('activity.loginactivity') }}" class="btn btn-info waves-effect waves-light">
+                             Visitor Activity
+                         </a>
+                     </div>
+                 </div>
                  <div class="card-body">
                      <div class="mb-3">
                      </div>
                      <table class="table table-hover" id="example1" style="font-size: 14px;">
                          <thead>
 
-                             <div class="mb-3">
-                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                     <a href="{{ route('activity.index') }}"
-                                         class="btn btn-success waves-effect waves-light">
-                                         Activity Dashboard
-                                     </a>
-                                     <a href="{{ route('activity.index') }}"
-                                         class="btn btn-success waves-effect waves-light">
-                                         Activity Log
-                                     </a>
-                                     <a href="{{ route('activity.loginactivity') }}"
-                                         class="btn btn-success waves-effect waves-light">
-                                         Login Activity
-                                     </a>
-                                     <a href="{{ route('activity.loginactivity') }}"
-                                         class="btn btn-success waves-effect waves-light">
-                                         Visitor Activity
-                                     </a>
-                                 </div>
-                             </div>
+
                              <tr>
                                  <th width="10px">ID</th>
                                  <th width="">log_name</th>

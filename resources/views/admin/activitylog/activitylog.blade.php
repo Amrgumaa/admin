@@ -5,7 +5,6 @@
          type="text/css" />
      <link href="{{ asset('admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
          rel="stylesheet" type="text/css" />
-
      <!-- Responsive datatable examples -->
      <link href="{{ asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
          rel="stylesheet" type="text/css" />
@@ -31,6 +30,7 @@
      </div>
      <!-- end page title -->
      <!-- Start here -->
+
      <div class="row">
          <div class="col-md-12">
              <div class="card">
@@ -82,12 +82,18 @@
                                          <td> {{ ucfirst($activity->description) }}</td>
                                          <td>{{ ucfirst($activity->subject_type) }}</td>
                                          <td>{{ $activity->subject_id }}</td>
-                                         <td>{{ ucfirst($activity->causer_type) }}</td>
-                                         <td>{{ ucfirst($activity->causer_id) }}</td>
+                                         @if ($activity->causer_id > 1)
+                                             <td>{{ ucfirst($activity->causer_type) }}</td>
+                                             <td>{{ ucfirst($activity->causer_id) }}</td>
+                                         @else
+                                             <td>Register</td>
+                                             <td>N/A</td>
+                                         @endif
+
                                          @if ($activity->causer_id > 1)
                                              <td> {{ $activity->causer_type::find($activity->causer_id)->name }} </td>
                                          @else
-                                             <td></td>
+                                             <td>System</td>
                                          @endif
 
 

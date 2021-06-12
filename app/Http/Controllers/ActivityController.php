@@ -22,7 +22,7 @@ class ActivityController extends Controller
        $activities = DB::table('activity_log')
              ->whereIn('description', ['created', 'deleted','updated'])
              ->get();
-       return view('admin.activitylog.index', compact(['activities']));
+       return view('admin.activitylog.activitylog', compact(['activities']));
 
     }
 

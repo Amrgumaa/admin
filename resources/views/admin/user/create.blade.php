@@ -68,7 +68,7 @@
                                     <div class="col-md-8">
                                         <input type="email" class="form-control  @error('email') is-invalid @enderror"
                                             name="email" id="" aria-describedby="helpId" placeholder="Enter Email"
-                                            value="{{ old('email') }}" required>
+                                            value="{{ old('email') }}" required autocomplete="email">
                                         <div class="invalid-feedback">
                                             Field is required
                                         </div>
@@ -86,7 +86,7 @@
                                     <div class="col-md-8">
                                         <input type="password" class="form-control @error('password') is-invalid @enderror"
                                             name="password" id="password" aria-describedby="helpId"
-                                            placeholder="Enter Password" required>
+                                            placeholder="Enter Password" required autocomplete="password">
                                         <div class="invalid-feedback">
                                             Field is required
                                         </div>
@@ -102,7 +102,7 @@
                                     <div class="col-md-8">
                                         <input type="password" class="form-control @error('password') is-invalid @enderror"
                                             name="password_confirmation" id="password-confirm" aria-describedby="helpId"
-                                            placeholder="Confirm Password" required>
+                                            placeholder="Confirm Password" required autocomplete="password_confirmation">
                                         <div class="invalid-feedback">
                                             Field is required
                                         </div>

@@ -57,4 +57,10 @@ class User extends Authenticatable implements HasMedia
     // {
     //     return $this->belongsTo(Activity::class, 'causer_id', 'user_id');
     // }
+
+
+      public function visitor()
+    {
+        return $this->belongsTo(Visitorlog::class, 'user_id','id');
+    }
 }

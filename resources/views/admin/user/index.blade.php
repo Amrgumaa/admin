@@ -117,8 +117,8 @@
 
  @section('foot')
 
-     <!-- jQuery -->
-     <script src="{{ asset('assets2/plugins/jquery/jquery.min.js') }}"></script>
+
+
      <!-- DataTables  & Plugins -->
      <!-- Required datatable js -->
      <script src="{{ asset('admin/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -140,6 +140,7 @@
 
      <!-- Datatable init js -->
      <script src="{{ asset('admin/assets/js/pages/datatables.init.js') }}"></script>
+
 
      <!-- Sweet Alerts js -->
      <script src="{{ asset('admin/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>

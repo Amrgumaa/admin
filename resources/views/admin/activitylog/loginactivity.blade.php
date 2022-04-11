@@ -107,8 +107,7 @@
 
  @section('foot')
 
-     <!-- jQuery -->
-     <script src="{{ asset('assets2/plugins/jquery/jquery.min.js') }}"></script>
+
      <!-- DataTables  & Plugins -->
      <!-- Required datatable js -->
      <script src="{{ asset('admin/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>

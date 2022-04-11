@@ -45,8 +45,8 @@
                          <a href="{{ route('activity.loginactivity') }}" class="btn btn-info waves-effect waves-light">
                              Login Activity
                          </a>
-                         <a href="{{ route('activity.loginactivity') }}" class="btn btn-info waves-effect waves-light">
-                             Visitor Activity
+                         <a href="{{ route('activity.visitorlog') }}" class="btn btn-info waves-effect waves-light">
+                             Visitor Log
                          </a>
                      </div>
                  </div>
@@ -140,8 +140,7 @@
 
  @section('foot')
 
-     <!-- jQuery -->
-     <script src="{{ asset('assets2/plugins/jquery/jquery.min.js') }}"></script>
+
      <!-- DataTables  & Plugins -->
      <!-- Required datatable js -->
      <script src="{{ asset('admin/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>

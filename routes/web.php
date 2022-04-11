@@ -31,4 +31,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
  Route::put('/user/{user}/changeavatar/', [App\Http\Controllers\UserController::class, 'changeavatar'])->name('changeavatar');
  Route::resource('/activity', App\Http\Controllers\ActivityController::class);
   Route::get('/loginactivity', [App\Http\Controllers\ActivityController::class, 'loginactivity'])->name('activity.loginactivity');
+    Route::get('/visitorlog', [App\Http\Controllers\ActivityController::class, 'visitorlog'])->name('activity.visitorlog');
+    Route::get('/urlvisits', [App\Http\Controllers\ActivityController::class, 'urlvisits'])->name('activity.urlvisits');
+
+
+
 });

@@ -7,7 +7,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ ('welcome/assets/img/favicons/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('welcome/assets/img/favicons/favicon-32x32.png') }}">
         <!-- head -->
         @include('admin.layouts/includes/head')
         <!-- endhead -->

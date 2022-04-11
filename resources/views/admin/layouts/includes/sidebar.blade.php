@@ -52,11 +52,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow">Users activity</a>
+                        <a href="javascript: void(0);" class="has-arrow">Activity & log</a>
                         <ul class="sub-menu" aria-expanded="true">
                             <li><a href="{{ route('activity.create') }}">Dashboard</a></li>
-                            <li><a href="{{ route('activity.index') }}">Activity Log</a></li>
-                            <li><a href="{{ route('activity.loginactivity') }}">Login Activity</a></li>
+                            <li><a href="{{ route('activity.index') }}">User activity Log</a></li>
+                            <li><a href="{{ route('activity.loginactivity') }}">User Login Activity</a></li>
+                            <li><a href="{{ route('activity.visitorlog') }}">User Last Login</a></li>
+                            <li><a href="{{ route('activity.visitorlog') }}">Visitor Log</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\urllog;
 use App\Models\User;
+use App\Models\Visitoralog;
+use App\Models\Visitorlog;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
 use Illuminate\Support\Facades\Auth;
@@ -56,9 +59,7 @@ class ActivityController extends Controller
     public function show($id)
     {
 
-
           $activity = Activity::findOrFail($id);
-
 
             if($activity->description == "updated"){
                  $arrnew = json_decode(json_encode($activity->properties['attributes'],TRUE),TRUE);
@@ -69,15 +70,14 @@ class ActivityController extends Controller
                 return view('admin.activitylog.show',compact('activity','oldarr','newarr','keys'));
 
             }elseif ($activity->description == "deleted") {
-                  $arrold = json_decode(json_encode($activity->properties['old'],TRUE),TRUE);
-                 $oldarr = implode(",", $arrold);
+                $arrold = json_decode(json_encode($activity->properties['old'],TRUE),TRUE);
+                $oldarr = implode(",", $arrold);
                 [$keys] = Arr::divide($arrold);
                 return view('admin.activitylog.show',compact('activity','oldarr','keys'));
 
             }else
 
             {
-
                 $arrnew = json_decode(json_encode($activity->properties['attributes'],TRUE),TRUE);
                 $newarr = implode(",", $arrnew);
                 [$keys] = Arr::divide($arrnew);
@@ -126,6 +126,35 @@ class ActivityController extends Controller
              ->get();
        return view('admin.activitylog.loginactivity', compact(['activities']));
 
+    }
+   public function visitorlog()
+    {
+
+      $visitorlogs =Visitorlog::all();
+      $urllogs=Visitorlog::with('url')->get()->take(1);
+
+       return view('admin.activitylog.visitorlog', compact(['visitorlogs','urllogs']));
+    }
+
+    public function urlvisits()
+    {
+
+
+
+    //   $urls = urllog::distinct('url')->pluck('url');
+      $urls=urllog::select('url', DB::raw('count(url) quantity'))->groupBy('url')->get();
+      $visitor=Visitorlog::all();
+      $urlonline =urllog::with('visitorlog')->where( '$visitor->url()->latest()->first()->created_at->diffInMinutes(now())  <"3" ')->count();
+
+      dd($urlonline);
+
+    //   $urlcounts=urllog::select('url', DB::raw('count(url) quantity'))->groupBy('url')->get();
+
+    //   $urlcounts=DB::table('urllogs')
+    //         ->count('url');
+
+
+       return view('admin.activitylog.urlvisit', compact(['urls']));
     }
 
 }
